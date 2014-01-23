@@ -1,0 +1,15 @@
+List of changes to the default jboss configuration:
+
+    1. Modified /bin/standalone.conf
+           Added a dotcms home variable: DOTCMS_HOME="$JBOSS_HOME/standalone/deployments/dotcms.war"
+           Modified the Xmx size
+           Added an extra java option: -javaagent:$DOTCMS_HOME/WEB-INF/lib/jamm-0.2.5.jar
+
+    2. Modified /bin/standalone.sh
+           Changed the order to read the standalone.conf in order to have access to the JBOSS_HOME variable
+
+    3. Modified /standalone/configuration/standalone.xml
+           Commented example datasource and driver
+           Changed the enable-welcome-root property to false
+
+    4. Removed the welcome-content folder
