@@ -11,5 +11,12 @@ List of changes to the default jboss configuration:
     3. Modified /standalone/configuration/standalone.xml
            Commented example datasource and driver
            Changed the enable-welcome-root property to false
+           Added a default datasource and drive for h2
+           Added a datasource and drive for postgres as example (It is commented)
+           Added to the deployment-scanner the option: deployment-timeout="1200" in order to increase the deployment timeout, the default time out is to short for dotcms.
 
     4. Removed the welcome-content folder
+
+    5. Added JDBC Drivers
+        The drivers were added under /modules/com/dotcms/
+        We added the drivers for the h2, mssql, mysql, oracle and postgres data bases.

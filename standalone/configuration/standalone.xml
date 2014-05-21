@@ -91,7 +91,7 @@
         <subsystem xmlns="urn:jboss:domain:datasources:1.0">
 
             <datasources>
-                <datasource jndi-name="java:/jdbc/dotCMSPool" pool-name="jdbc/dotCMSPool" enabled="true">
+                <!--<datasource jndi-name="java:/jdbc/dotCMSPool" pool-name="jdbc/dotCMSPool" enabled="true">
                     <connection-url>jdbc:postgresql://localhost:5432/dotcms</connection-url>
                     <driver-class>org.postgresql.Driver</driver-class>
                     <driver>postgresql</driver>
@@ -112,10 +112,29 @@
                         <prepared-statement-cache-size>0</prepared-statement-cache-size>
                         <share-prepared-statements>false</share-prepared-statements>
                     </statement>
+                </datasource>-->
+                <datasource jta="false" jndi-name="java:/jdbc/dotCMSPool" pool-name="dotCMSPool" enabled="true" use-ccm="false">
+                    <connection-url>jdbc:h2:h2_dotcms_data;MVCC=TRUE</connection-url>
+                    <driver-class>org.h2.Driver</driver-class>
+                    <driver>dotCMSh2</driver>
+                    <security>
+                        <user-name>sa</user-name>
+                        <password>sa</password>
+                    </security>
+                    <validation>
+                        <validate-on-match>false</validate-on-match>
+                        <background-validation>false</background-validation>
+                    </validation>
+                    <statement>
+                        <share-prepared-statements>false</share-prepared-statements>
+                    </statement>
                 </datasource>
                 <drivers>
-                    <driver name="postgresql" module="com.dotcms.postgres">
+                    <!--<driver name="postgresql" module="com.dotcms.postgres">
                         <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+                    </driver>-->
+                    <driver name="dotCMSh2" module="com.dotcms.h2">
+                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
                 </drivers>
             </datasources>
