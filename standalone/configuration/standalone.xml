@@ -89,24 +89,59 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:configadmin:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:1.0">
+
             <datasources>
-                <!--<datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</connection-url>
-                    <driver>h2</driver>
+                <!--<datasource jndi-name="java:/jdbc/dotCMSPool" pool-name="jdbc/dotCMSPool" enabled="true">
+                    <connection-url>jdbc:postgresql://localhost:5432/dotcms</connection-url>
+                    <driver-class>org.postgresql.Driver</driver-class>
+                    <driver>postgresql</driver>
+                    <pool>
+                        <min-pool-size>5</min-pool-size>
+                        <max-pool-size>60</max-pool-size>
+                    </pool>
+                    <security>
+                        <user-name>postgres</user-name>
+                        <password>postgres</password>
+                    </security>
+                    <validation>
+                        <validate-on-match>false</validate-on-match>
+                        <background-validation>false</background-validation>
+                        <background-validation-millis>1</background-validation-millis>
+                    </validation>
+                    <statement>
+                        <prepared-statement-cache-size>0</prepared-statement-cache-size>
+                        <share-prepared-statements>false</share-prepared-statements>
+                    </statement>
+                </datasource>-->
+                <datasource jta="false" jndi-name="java:/jdbc/dotCMSPool" pool-name="dotCMSPool" enabled="true" use-ccm="false">
+                    <connection-url>jdbc:h2:h2_dotcms_data;MVCC=TRUE</connection-url>
+                    <driver-class>org.h2.Driver</driver-class>
+                    <driver>dotCMSh2</driver>
                     <security>
                         <user-name>sa</user-name>
                         <password>sa</password>
                     </security>
-                </datasource>-->
+                    <validation>
+                        <validate-on-match>false</validate-on-match>
+                        <background-validation>false</background-validation>
+                    </validation>
+                    <statement>
+                        <share-prepared-statements>false</share-prepared-statements>
+                    </statement>
+                </datasource>
                 <drivers>
-                    <!--<driver name="h2" module="com.h2database.h2">
-                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    <!--<driver name="postgresql" module="com.dotcms.postgres">
+                        <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
                     </driver>-->
+                    <driver name="dotCMSh2" module="com.dotcms.h2">
+                        <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+                    </driver>
                 </drivers>
             </datasources>
+
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:deployment-scanner:1.1">
-            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000"/>
+            <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" deployment-timeout="1200"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee:1.0"/>
         <subsystem xmlns="urn:jboss:domain:ejb3:1.2">
