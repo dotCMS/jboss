@@ -9,7 +9,7 @@ List of changes to the default jboss configuration:
                else
                     JBOSS_MODULES_SYSTEM_PKGS="org.github.jamm"
                fi
-           Added an extra java option: -javaagent:$JBOSS_HOME/modules/org/github/jamm/main/jamm-0.2.5.jar
+           Added an extra java option: -javaagent:$JBOSS_HOME/modules/org/github/jamm/main/dot.jamm-0.2.5_1.jar
 
     2. Modified /bin/standalone.sh
            Changed the order to read the standalone.conf in order to have access to the JBOSS_HOME variable
